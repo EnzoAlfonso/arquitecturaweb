@@ -2,6 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+
+const db = require("./app/models");
+db.sequelize.sync();
+
 var corsOptions = {
   origin: "http://localhost:9091"
 };
@@ -12,8 +16,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Son todos putos" });
+  res.json({ message: "Arquitectura web" });
 });
+
+require("./app/routes/venta.routes")(app);
+
 // set port, listen for requests
 const PORT = process.env.PORT || 9090;
 app.listen(PORT, () => {
