@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
       client_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Clients", // Nombre del modelo al que hace referencia
+          model: "Clientes",
           key: "id"
         }
       },
@@ -22,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
       concepto_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "PointUsageConcepts", // Nombre del modelo al que hace referencia
+          model: "PointUsageConcepts",
           key: "id"
         }
       }
