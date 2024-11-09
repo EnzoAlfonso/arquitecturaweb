@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/venta.routes")(app);
+require('./app/routes/cliente.routes.js')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 9090;
