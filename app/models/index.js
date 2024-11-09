@@ -17,4 +17,5 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.Ventas = require("./venta.model.js")(sequelize, Sequelize);
 db.Clientes = require("./cliente.model.js")(sequelize, Sequelize);
+db.PointBalances = require("./pointBalance.model.js")(sequelize, Sequelize);
 module.exports = db;
