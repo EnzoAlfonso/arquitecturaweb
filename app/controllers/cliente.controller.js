@@ -72,3 +72,28 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+// Eliminar un cliente por id
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Cliente.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num === 1) {
+        res.send({
+          message: "Cliente eliminado exitosamente."
+        });
+      } else {
+        res.status(404).send({
+          message: No se encontró cliente con id=${id}.
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Ocurrió un error al intentar eliminar el cliente con id=" + id
+      });
+    });
+};
