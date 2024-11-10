@@ -63,3 +63,27 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+// Actualizar un concepto por id
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  PointUsageConcept.update(req.body, { where: { id: id } })
+      .then(num => {
+          if (num == 1) res.send({ message: "Concepto actualizado exitosamente." });
+          else res.status(404).send({ message: `No se encontró el concepto con id=${id} o no se realizaron cambios.` });
+      })
+      .catch(err => res.status(500).send({ message: "Error al actualizar el concepto con id=" + id }));
+};
+
+// Eliminar un concepto por id
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  PointUsageConcept.destroy({ where: { id: id } })
+      .then(num => {
+          if (num == 1) res.send({ message: "Concepto eliminado exitosamente." });
+          else res.status(404).send({ message: `No se encontró el concepto con id=${id}.` });
+      })
+      .catch(err => res.status(500).send({ message: "Error al eliminar el concepto con id=" + id }));
+};

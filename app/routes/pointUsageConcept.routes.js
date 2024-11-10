@@ -5,5 +5,7 @@ module.exports = app => {
   router.post("/", pointUsageConcept.create);
   router.get("/", pointUsageConcept.findAll);
   router.get("/:id", pointUsageConcept.findOne);
+  router.put("/:id", pointUsageConcept.update);
+  router.delete("/:id", pointUsageConcept.delete);
   app.use('/api/pointusageconcept', router);
 };
