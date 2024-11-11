@@ -1,5 +1,6 @@
+// pointAssignmentRule.controller.js
 const db = require("../models");
-const PointAssignmentRule = db.PointAssignmentRule;
+const PointAssignmentRule = db.PointAssignmentRules;
 const Op = db.Sequelize.Op;
 
 // Crear una nueva regla de asignación de puntos
@@ -41,7 +42,7 @@ exports.findOne = (req, res) => {
     PointAssignmentRule.findByPk(id)
         .then(data => {
             if (data) res.send(data);
-            else res.status(404).send({ message: 'No se encontró la regla con id=${id}. '});
+            else res.status(404).send({ message: `No se encontró la regla con id=${id}.` });
         })
         .catch(err => res.status(500).send({ message: "Error al obtener la regla con id=" + id }));
 };
@@ -53,7 +54,7 @@ exports.update = (req, res) => {
     PointAssignmentRule.update(req.body, { where: { id: id } })
         .then(num => {
             if (num == 1) res.send({ message: "Regla actualizada exitosamente." });
-            else res.status(404).send({ message: 'No se encontró la regla con id=${id} o no se realizaron cambios.' });
+            else res.status(404).send({ message: `No se encontró la regla con id=${id} o no se realizaron cambios.` });
         })
         .catch(err => res.status(500).send({ message: "Error al actualizar la regla con id=" + id }));
 };
@@ -65,7 +66,7 @@ exports.delete = (req, res) => {
     PointAssignmentRule.destroy({ where: { id: id } })
         .then(num => {
             if (num == 1) res.send({ message: "Regla eliminada exitosamente." });
-            else res.status(404).send({ message: 'No se encontró la regla con id=${id}. '});
+            else res.status(404).send({ message: `No se encontró la regla con id=${id}.` });
         })
         .catch(err => res.status(500).send({ message: "Error al eliminar la regla con id=" + id }));
 };
