@@ -1,5 +1,5 @@
 const db = require("../models");
-const PointExpiration = db.PointExpiration;
+const PointExpiration = db.PointExpirations;
 
 // Crear una nueva parametrización de vencimiento de puntos
 exports.create = (req, res) => {
