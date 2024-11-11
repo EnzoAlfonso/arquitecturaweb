@@ -25,6 +25,7 @@ require('./app/routes/pointBalance.routes.js')(app);
 require('./app/routes/pointExpiration.routes.js')(app);
 require('./app/routes/pointUsageConcept.routes.js')(app);
 require('./app/routes/pointUsage.routes.js')(app);
+require("./app/routes/pointAssignmentRule.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 9090;

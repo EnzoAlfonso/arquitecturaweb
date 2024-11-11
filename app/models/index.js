@@ -21,4 +21,5 @@ db.PointBalances = require("./pointBalance.model.js")(sequelize, Sequelize);
 db.PointExpirations = require("./pointExpiration.model.js")(sequelize, Sequelize);
 db.PointUsageConcepts = require("./pointUsageConcept.model.js")(sequelize, Sequelize);
 db.PointUsages = require("./pointUsage.model.js")(sequelize, Sequelize);
+db.PointAssignmentRule = require("./pointAssignmentRule.model.js")(sequelize, Sequelize);
 module.exports = db;
