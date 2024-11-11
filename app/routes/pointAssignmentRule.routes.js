@@ -7,5 +7,5 @@ module.exports = app => {
   router.get("/:id", pointAssignmentRule.findOne);
   router.put("/:id", pointAssignmentRule.update);
   router.delete("/:id", pointAssignmentRule.delete);
-  app.use("/api/reglas-asignacion-puntos", router);
+  app.use("/api/pointassignmentrule", router);
 };
