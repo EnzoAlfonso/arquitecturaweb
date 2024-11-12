@@ -1,5 +1,6 @@
 const db = require("../models");
 const PointBalance = db.PointBalances;
+const PointUsage = db.PointUsages;
 const Op = db.Sequelize.Op;
 
 // Crear o actualizar el saldo de puntos
@@ -29,7 +30,7 @@ exports.createOrUpdatePointBalance = (req, res) => {
   const pointBalance = {
     client_id: req.body.client_id,
     fecha_asignacion: req.body.fecha_asignacion || new Date(),
-    fecha_caducidad: req.body.fecha_caducidad,
+    fecha_caducidad: req.body.fecha_caducidad || new Date(2025, 11, 31),
     puntaje_asignado: puntosAsignados,
     puntaje_utilizado: req.body.puntaje_utilizado || 0,
     saldo_puntos: saldoPuntosCalculado,

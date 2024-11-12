@@ -1,9 +1,18 @@
-module.exports = app => {
-  const pointUsage = require("../controllers/pointUsage.controller.js");
-  var router = require("express").Router();
+// routes/pointUsage.routes.js
+module.exports = (app) => {
+  const pointUsageController = require("../controllers/pointUsage.controller.js");
+  const express = require("express");
+  const router = express.Router();
 
-  router.post("/", pointUsage.create);
-  router.get("/", pointUsage.findAll);
-  router.get("/:id", pointUsage.findOne);
+  // Ruta para crear un nuevo PointUsage
+  router.post("/", pointUsageController.create);
+
+  // Ruta para obtener todos los PointUsages
+  router.get("/", pointUsageController.findAll);
+
+  // Ruta para obtener un PointUsage por ID
+  router.get("/:id", pointUsageController.findOne);
+
+  // Configurar la ruta base para PointUsage
   app.use('/api/pointusage', router);
 };
