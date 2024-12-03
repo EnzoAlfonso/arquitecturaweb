@@ -36,7 +36,23 @@ module.exports = (sequelize, Sequelize) => {
     },
     historial_compras: {
       type: Sequelize.JSON
+    },
+    // Clave foránea para nivel de fidelización
+    nivel_fidelizacion_id: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "NivelFidelizacions",
+        key: "id"
+      }
     }
   });
+
+  Cliente.associate = models => {
+    Cliente.belongsTo(models.NivelFidelizacions, {
+      foreignKey: "nivel_fidelizacion_id",
+      as: "nivelFidelizacion"
+    });
+  };
+
   return Cliente;
 };

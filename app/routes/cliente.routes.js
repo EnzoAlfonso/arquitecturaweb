@@ -8,6 +8,7 @@ module.exports = app => {
   router.get("/", cliente.findAll);
   router.get("/:id", cliente.findOne);
   router.delete("/:id", cliente.delete);
- 
+  router.put("/:id/nivel", cliente.actualizarNivelFidelizacion);
+
   app.use('/api/cliente', router);
 };

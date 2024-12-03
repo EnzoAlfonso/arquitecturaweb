@@ -23,7 +23,8 @@ exports.create = (req, res) => {
     telefono: req.body.telefono,
     fecha_nacimiento: req.body.fecha_nacimiento,
     ubicacion: req.body.ubicacion,
-    historial_compras: req.body.historial_compras
+    historial_compras: req.body.historial_compras,
+    nivel_fidelizacion_id: req.body.nivel_fidelizacion_id || 1
   };
 
   // Guardar en la base de datos
@@ -131,4 +132,42 @@ exports.segmentar = (req, res) => {
         message: err.message || "Ocurrió un error al segmentar los clientes."
       });
     });
+};
+
+// Actualizar el nivel de fidelización del cliente
+exports.actualizarNivelFidelizacion = (req, res) => {
+  const id = req.params.id;
+
+  Cliente.findByPk(id)
+    .then(cliente => {
+      if (!cliente) {
+        return res.status(404).send({
+          message: `No se encontró cliente con id=${id}.`
+        });
+      }
+
+      // Obtener los niveles de fidelización
+      NivelFidelizacion.findAll()
+        .then(niveles => {
+          // Ordenar los niveles por puntos requeridos de menor a mayor
+          niveles.sort((a, b) => a.puntos_requeridos - b.puntos_requeridos);
+
+          // Determinar el nuevo nivel de fidelización
+          let nuevoNivelId = cliente.nivel_fidelizacion_id;
+          for (let nivel of niveles) {
+            if (cliente.saldo_puntos >= nivel.puntos_requeridos) {
+              nuevoNivelId = nivel.id;
+            } else {
+              break;
+            }
+          }
+
+          // Actualizar el nivel de fidelización del cliente
+          cliente.update({ nivel_fidelizacion_id: nuevoNivelId })
+            .then(() => res.send({ message: "Nivel de fidelización actualizado exitosamente." }))
+            .catch(err => res.status(500).send({ message: "Error al actualizar el nivel de fidelización." }));
+        })
+        .catch(err => res.status(500).send({ message: "Error al obtener los niveles de fidelización." }));
+    })
+    .catch(err => res.status(500).send({ message: "Error al obtener el cliente." }));
 };

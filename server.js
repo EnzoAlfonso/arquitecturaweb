@@ -26,9 +26,10 @@ require('./app/routes/pointExpiration.routes.js')(app);
 require('./app/routes/pointUsageConcept.routes.js')(app);
 require('./app/routes/pointUsage.routes.js')(app);
 require("./app/routes/pointAssignmentRule.routes.js")(app);
+require("./app/routes/nivelFidelizacion.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 9090;
 app.listen(PORT, () => {
-  console.log('Servidor corriendo en puerto 9090.');
+  console.log(`Servidor corriendo en puerto ${PORT}.`);
 });
