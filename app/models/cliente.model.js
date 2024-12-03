@@ -30,6 +30,12 @@ module.exports = (sequelize, Sequelize) => {
     },
     fecha_nacimiento: {
       type: Sequelize.DATE
+    },
+    ubicacion: {
+      type: Sequelize.STRING(100)
+    },
+    historial_compras: {
+      type: Sequelize.JSON
     }
   });
   return Cliente;

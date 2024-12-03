@@ -21,7 +21,9 @@ exports.create = (req, res) => {
     nacionalidad: req.body.nacionalidad,
     email: req.body.email,
     telefono: req.body.telefono,
-    fecha_nacimiento: req.body.fecha_nacimiento
+    fecha_nacimiento: req.body.fecha_nacimiento,
+    ubicacion: req.body.ubicacion,
+    historial_compras: req.body.historial_compras
   };
 
   // Guardar en la base de datos
@@ -87,13 +89,46 @@ exports.delete = (req, res) => {
         });
       } else {
         res.status(404).send({
-          message:`No se encontró cliente con id=${id}.` 
+          message: `No se encontró cliente con id=${id}.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
         message: "Ocurrió un error al intentar eliminar el cliente con id=" + id
+      });
+    });
+};
+
+// Nueva función para segmentar clientes
+exports.segmentar = (req, res) => {
+  const { edad, ubicacion, historial_compras } = req.query;
+  let condition = {};
+
+  // Filtrar por edad
+  if (edad) {
+    const currentYear = new Date().getFullYear();
+    const birthYear = currentYear - edad;
+    condition.fecha_nacimiento = { [Op.lte]: new Date(birthYear, 11, 31) };
+  }
+
+  // Filtrar por ubicación
+  if (ubicacion) {
+    condition.ubicacion = { [Op.iLike]: `%${ubicacion}%` };
+  }
+
+  // Filtrar por historial de compras (ejemplo: total de compras mayor a un valor)
+  if (historial_compras) {
+    condition.historial_compras = { [Op.contains]: [historial_compras] };
+  }
+
+  Cliente.findAll({ where: condition })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "Ocurrió un error al segmentar los clientes."
       });
     });
 };
