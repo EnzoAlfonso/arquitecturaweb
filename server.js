@@ -28,6 +28,7 @@ require('./app/routes/pointUsage.routes.js')(app);
 require("./app/routes/pointAssignmentRule.routes.js")(app);
 require("./app/routes/nivelFidelizacion.routes.js")(app);
 require("./app/routes/referidos.routes.js")(app);
+require("./app/routes/dashboard.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 9090;
