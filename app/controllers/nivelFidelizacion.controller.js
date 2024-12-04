@@ -1,5 +1,6 @@
 const db = require("../models");
-const NivelFidelizacion = db.NivelFidelizacions;
+const NivelFidelizacion = db.nivelFidelizacions;
+const Cliente = db.Clientes;
 const Op = db.Sequelize.Op;
 
 // Crear un nuevo nivel de fidelización

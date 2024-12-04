@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 
 const db = require("./app/models");
-db.sequelize.sync();
+
 
 var corsOptions = {
   origin: "http://localhost:9091"
@@ -27,6 +27,7 @@ require('./app/routes/pointUsageConcept.routes.js')(app);
 require('./app/routes/pointUsage.routes.js')(app);
 require("./app/routes/pointAssignmentRule.routes.js")(app);
 require("./app/routes/nivelFidelizacion.routes.js")(app);
+require("./app/routes/referidos.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 9090;

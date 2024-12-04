@@ -1,5 +1,6 @@
 const db = require("../models");
 const Cliente = db.Clientes;
+const NivelFidelizacion = db.NivelFidelizacions;
 const Op = db.Sequelize.Op;
 
 // Crear un nuevo cliente
@@ -75,6 +76,8 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+
 
 // Eliminar un cliente por id
 exports.delete = (req, res) => {
